@@ -83,8 +83,7 @@ namespace EA.CommonLib.MessageBus
                 .Or<BrokerUnreachableException>()
                 .WaitAndRetry(3, retry => TimeSpan.FromSeconds(Math.Pow(2, retry)));
 
-            policy.Execute(() =>
-            {
+            policy.Execute(() => {
                 _bus = RabbitHutch.CreateBus(_connectionString);
                 _advancedBus = _bus.Advanced;
                 _advancedBus.Disconnected += OnDisconnect;
