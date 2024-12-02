@@ -1,9 +1,5 @@
-﻿using FluentValidation.Results;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentValidation;
+using FluentValidation.Results;
 
 namespace EA.CommonLib.Messages
 {
@@ -11,6 +7,9 @@ namespace EA.CommonLib.Messages
     {
         protected CommandHandler() => ValidationResult = new ValidationResult();
         protected ValidationResult ValidationResult { get; set; }
-        protected void AddError(string mensagem) => ValidationResult.Errors.Add(new ValidationFailure(string.Empty, mensagem));
+        protected void AddError(string message) => ValidationResult.Errors.Add(new ValidationFailure(string.Empty, message));
+        protected ValidationResult ValidateEntity<TV, TE>(
+            TV validation, TE entity) where TV
+        : AbstractValidator<TE> where TE : class => validation.Validate(entity);
     }
 }
