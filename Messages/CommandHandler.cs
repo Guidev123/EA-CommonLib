@@ -8,8 +8,8 @@ namespace EA.CommonLib.Messages
         protected void AddError(ValidationResult validationResult, string message) =>
             validationResult.Errors.Add(new ValidationFailure(string.Empty, message));
 
-        protected string GetAllErrors(ValidationResult validationResult) =>
-            string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage));
+        protected string[] GetAllErrors(ValidationResult validationResult) =>
+            validationResult.Errors.Select(e => e.ErrorMessage).ToArray();
 
         protected ValidationResult ValidateEntity<TV, TE>(
             TV validation, TE entity) where TV
