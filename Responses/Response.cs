@@ -5,7 +5,7 @@ namespace EA.CommonLib.Responses
 {
     public class Response<TData>
     {
-        private readonly int _code;
+        public readonly int _code;
 
         [JsonConstructor]
         public Response()
