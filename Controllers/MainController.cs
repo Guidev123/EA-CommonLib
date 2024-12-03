@@ -7,7 +7,7 @@ namespace EA.CommonLib.Controllers
     [ApiController]
     public class MainController : ControllerBase
     {
-        public IResult CustomResponse<T>(Response<T> response) => response._code switch
+        public IResult CustomResponse<T>(Response<T> response) => response.Code switch
         {
             200 => TypedResults.Ok(response),
             400 => TypedResults.BadRequest(response),

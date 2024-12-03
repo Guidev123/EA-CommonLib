@@ -5,12 +5,6 @@ namespace EA.CommonLib.Responses
 {
     public class Response<TData>
     {
-        public readonly int _code;
-
-        [JsonConstructor]
-        public Response()
-            => _code = 200;
-
         public Response(
             TData? data,
             int code = 200,
@@ -18,14 +12,16 @@ namespace EA.CommonLib.Responses
         {
             Data = data;
             Message = message;
-            _code = code;
+            Code = code;
         }
 
-        public TData? Data { get; set; }
-        public string? Message { get; set; }
+        [JsonIgnore]
+        public int Code { get; }
+        public TData? Data { get; }
+        public string? Message { get; }
 
         [JsonIgnore]
         public bool IsSuccess
-            => _code is >= 200 and <= 299;
+            => Code is >= 200 and <= 299;
     }
 }
