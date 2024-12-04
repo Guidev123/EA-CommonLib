@@ -1,13 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace EA.CommonLib.Responses
 {
     public class Response<TData>
     {
+        public const int DEFAULT_STATUS_CODE = 200;
+
         public Response(
             TData? data,
-            int code = 200,
+            int code = DEFAULT_STATUS_CODE,
             string? message = null,
             string[]? errors = null)
         {
@@ -19,12 +20,12 @@ namespace EA.CommonLib.Responses
 
         [JsonIgnore]
         public int Code { get; }
-        public TData? Data { get; }
+        public TData? Data { get; set; }
         public string? Message { get; }
         public string[]? Errors { get; }
 
         [JsonIgnore]
         public bool IsSuccess
-            => Code is >= 200 and <= 299;
+            => Code is >= DEFAULT_STATUS_CODE and <= 299;
     }
 }
