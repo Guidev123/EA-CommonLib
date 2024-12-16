@@ -9,7 +9,7 @@ namespace EA.CommonLib.Messages
     {
         public DateTime Timestamp { get; private set; }
         [JsonIgnore]
-        public ValidationResult? ValidationResult { get; set; }
+        public ValidationResult ValidationResult { get; set; } = new ValidationResult();
         protected Command() => Timestamp = DateTime.Now;
 
         public virtual bool IsValid()
